@@ -1,8 +1,9 @@
 package com.maven.test;
 
-import io.github.bonigarcia.wdm.ChromeDriverManager;
-import io.github.bonigarcia.wdm.InternetExplorerDriverManager;
 
+
+import java.io.File;
+import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
 
@@ -76,14 +77,28 @@ public abstract class AbstractTest {
 		case "firefox":
 			return new FirefoxDriver();
 		case "chrome":
-			new ChromeDriverManager().setup();
+			setupChromeDriver();
 			return new ChromeDriver();
 		case "internet explorer":
-			new InternetExplorerDriverManager().setup();
+			setupIEDriver();
 			return new InternetExplorerDriver();
 		default:
 			return new HtmlUnitDriver();
 		}
+	}
+	
+	protected void setupChromeDriver() {
+		URL url = this.getClass().getResource("chromedriver.exe");
+		File file = new File(url.getPath());
+		System.setProperty("webdriver.chrome.driver", file.getAbsolutePath());
+		
+	}
+	
+	protected void setupIEDriver() {
+		URL url = this.getClass().getResource("IEDriverServer.exe");
+		File file = new File(url.getPath());
+		System.setProperty("webdriver.ie.driver", file.getAbsolutePath());
+		
 	}
 
 	protected String getTitle() {

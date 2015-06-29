@@ -8,7 +8,7 @@ import org.openqa.selenium.WebElement;
 
 public class GoogleTest extends AbstractTest {
 
-	protected String pageUrl = "http://www.google.pl";
+	protected String pageUrl = "http://www.google.pl/ncr";
 	protected String routeToTest = "";
 
 	public GoogleTest(String browser) {
@@ -25,8 +25,7 @@ public class GoogleTest extends AbstractTest {
 		WebElement q = find.byName("q");
 		q.sendKeys("Hello world");
 		q.submit();
-		// this.executeJavaScript("alert('hello world')");
 		Thread.sleep(1000);
-		assertEquals("Hello world - Szukaj w Google", getTitle());
+		assertEquals("Hello world - Google Search", getTitle());
 	}
 }
